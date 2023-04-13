@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SquareScript : MonoBehaviour
 {
+    public float gaming;
     // Start is called before the first frame update
     void Start()
     {
