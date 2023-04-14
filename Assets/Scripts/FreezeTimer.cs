@@ -14,6 +14,11 @@ public class FreezeTimer : MonoBehaviour
 
     private bool Frozen;
 
+    private void Start()
+    {
+        Frozen = true;
+    }
+
     private void FixedUpdate()
     {
         
