@@ -33,7 +33,7 @@ public class FreezeTimer : MonoBehaviour
         }
         else
         {
-            Debug.Log("Time is UP!");
+            //Debug.Log("Time is UP!");
             TimeLeft = 10;
         }
     }
@@ -46,7 +46,7 @@ public class FreezeTimer : MonoBehaviour
 
         if (Frozen)
         {
-            TimerTxt.text = string.Format("{0} until Freeze", seconds);
+            TimerTxt.text = string.Format("{0}", seconds);
             Globalmovespeed = 1;
 
             if (seconds == 0)
@@ -54,7 +54,7 @@ public class FreezeTimer : MonoBehaviour
         }
         else 
         {
-            TimerTxt.text = string.Format("{0} until battle resumes", seconds);
+            TimerTxt.text = string.Format("{0}", seconds);
             Globalmovespeed = 0;
 
             if (seconds == 0)
