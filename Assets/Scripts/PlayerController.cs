@@ -13,7 +13,13 @@ public class PlayerController : MonoBehaviour
     public PlayerInputActions playerControls;
     private InputAction move;
     private InputAction fire;
+    private InputAction freeze;
     private Vector2 moveDirection;
+    private bool Freezing;
+
+    public Shooting shoot;
+
+    //static public float Globalmovespeed;
 
     // Start is called before the first frame update
     private void Awake()
@@ -29,14 +35,20 @@ public class PlayerController : MonoBehaviour
 
         fire= playerControls.Player.Fire;
         fire.Enable();
-
         fire.performed += Fire;
+
+
+        freeze = playerControls.Player.Freeze;
+        freeze.Enable();
+        
+
     }
 
     private void OnDisable()
     {
         move.Disable();
         fire.Disable();
+        freeze.Disable();
     }
 
     // Update is called once per frame
@@ -47,11 +59,20 @@ public class PlayerController : MonoBehaviour
 
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - transform.position);
+
+
+        Freezing = freeze.ReadValue<float>() > 0;
+
+
+
+
     }
 
     void FixedUpdate()
     {
         Move();
+        ifFreezing();
+
     }
 
     void Move()
@@ -62,7 +83,21 @@ public class PlayerController : MonoBehaviour
     void Fire(InputAction.CallbackContext context) 
     {
         Debug.Log("Fired");
+        shoot.Fire();
     
+    }
+
+    void ifFreezing()
+    {
+
+        //if (Freezing)
+        //    Globalmovespeed = 0;
+        //else
+        //    Globalmovespeed = 1;
+
+
+
+
     }
 
 
