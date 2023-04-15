@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class Laser : MonoBehaviour
+public class LaserE : MonoBehaviour
 {
     // Start is called before the first frame update
     public Rigidbody2D rb;
@@ -32,25 +31,16 @@ public class Laser : MonoBehaviour
         transform.position += Velocity * Time.deltaTime * FreezeTimer.Globalmovespeed;
         lastVelocity = Velocity;
 
-
         Vector2 screenPosition = mainCamera.WorldToScreenPoint(transform.position);
-        Debug.Log("x:" + screenPosition.x);
-        Debug.Log("y:" + screenPosition.y);
         if (screenPosition.x < widthThresold.x || screenPosition.x > widthThresold.y || screenPosition.y < heightThresold.x || screenPosition.y > heightThresold.y)
             Destroy(gameObject);
 
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            //Debug.Log("coll");
-            collision.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-            collision.gameObject.GetComponent<Animator>().SetTrigger("death");
-            Destroy(gameObject);
-        }
+
     }
 
     public void ChangeBulletDmg(float x)

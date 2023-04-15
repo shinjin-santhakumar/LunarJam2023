@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class DefaultEnemy : MonoBehaviour
+public class ShotgunEnemy : MonoBehaviour
 {
 
     [SerializeField] float moveSpeed;
@@ -26,7 +26,7 @@ public class DefaultEnemy : MonoBehaviour
 
             Vector3 direction = (target.position - transform.position).normalized;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg  * FreezeTimer.Globalmovespeed;
-            rb.rotation = angle;
+            //rb.rotation = angle;
             moveDirection = direction;
         }
     }

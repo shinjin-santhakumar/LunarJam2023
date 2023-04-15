@@ -29,6 +29,7 @@ public class PlayerLife : MonoBehaviour
     {
        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("EnemyLaser"))
        {
+            this.GetComponent<BoxCollider2D>().enabled = false;
             health -= 1;
             if (health >= 1)
             {

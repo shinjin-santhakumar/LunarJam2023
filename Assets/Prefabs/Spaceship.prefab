@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8607b3e4f8704474f9f4e9ec6b5b77b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 50
+  moveSpeed: 60
   rb: {fileID: 6890316202611006476}
   shoot: {fileID: 6890316202611006478}
   canAim: 1
