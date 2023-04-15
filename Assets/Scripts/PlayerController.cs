@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
 
     public Shooting shoot;
 
+    public bool canAim = true;
+
     //static public float Globalmovespeed;
 
     // Start is called before the first frame update
@@ -56,9 +58,13 @@ public class PlayerController : MonoBehaviour
     {
         moveDirection = move.ReadValue<Vector2>();
 
-
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - transform.position);
+        if (canAim == true)
+        {
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - transform.position);
+        }
+        // Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - transform.position);
 
 
         Freezing = freeze.ReadValue<float>() > 0;
@@ -77,7 +83,8 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
+        //rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
+        rb.AddForce(new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed));
     }
 
     void Fire(InputAction.CallbackContext context) 

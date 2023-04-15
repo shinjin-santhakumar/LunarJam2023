@@ -42,9 +42,15 @@ public class Laser : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("coll");
+            collision.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            collision.gameObject.GetComponent<Animator>().SetTrigger("death");
+            Destroy(gameObject);
+        }
     }
 
     public void ChangeBulletDmg(float x)
