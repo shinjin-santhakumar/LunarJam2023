@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
+        rb.AddForce(new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed) );
     }
 
     void Fire(InputAction.CallbackContext context) 

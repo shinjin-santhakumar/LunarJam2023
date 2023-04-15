@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class Laser : MonoBehaviour
+public class LaserE : MonoBehaviour
 {
     // Start is called before the first frame update
     public Rigidbody2D rb;
@@ -31,7 +30,6 @@ public class Laser : MonoBehaviour
         // Move the bullet in the direction of our velocity.
         transform.position += Velocity * Time.deltaTime * FreezeTimer.Globalmovespeed;
         lastVelocity = Velocity;
-
 
         Vector2 screenPosition = mainCamera.WorldToScreenPoint(transform.position);
         if (screenPosition.x < widthThresold.x || screenPosition.x > widthThresold.y || screenPosition.y < heightThresold.x || screenPosition.y > heightThresold.y)

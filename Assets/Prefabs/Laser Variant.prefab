@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &2652173384858562614
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4664534193736176002, guid: edcc2b9efcec7334ba970b568b85ee3c, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664534193736176002, guid: edcc2b9efcec7334ba970b568b85ee3c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664534193736176002, guid: edcc2b9efcec7334ba970b568b85ee3c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.73389894
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664534193736176002, guid: edcc2b9efcec7334ba970b568b85ee3c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664534193736176002, guid: edcc2b9efcec7334ba970b568b85ee3c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664534193736176002, guid: edcc2b9efcec7334ba970b568b85ee3c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664534193736176002, guid: edcc2b9efcec7334ba970b568b85ee3c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664534193736176002, guid: edcc2b9efcec7334ba970b568b85ee3c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664534193736176002, guid: edcc2b9efcec7334ba970b568b85ee3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664534193736176002, guid: edcc2b9efcec7334ba970b568b85ee3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664534193736176002, guid: edcc2b9efcec7334ba970b568b85ee3c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664534193736176004, guid: edcc2b9efcec7334ba970b568b85ee3c, type: 3}
+      propertyPath: m_Name
+      value: Laser Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664534193736176005, guid: edcc2b9efcec7334ba970b568b85ee3c, type: 3}
+      propertyPath: m_Color.b
+      value: 0.008056164
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664534193736176005, guid: edcc2b9efcec7334ba970b568b85ee3c, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664534193736176005, guid: edcc2b9efcec7334ba970b568b85ee3c, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4664534193736176000, guid: edcc2b9efcec7334ba970b568b85ee3c, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: edcc2b9efcec7334ba970b568b85ee3c, type: 3}
+--- !u!1 &7238877273497248178 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4664534193736176004, guid: edcc2b9efcec7334ba970b568b85ee3c, type: 3}
+  m_PrefabInstance: {fileID: 2652173384858562614}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6239105118974736585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7238877273497248178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff62f45577f531c48a67c8603aa070d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 7238877273497248181}
+  Velocity: {x: 0, y: 0, z: 0}
+  BulletDmg: 0
+  lastVelocity: {x: 0, y: 0, z: 0}
+  widthThresold: {x: -50, y: 1100}
+  heightThresold: {x: -50, y: 1100}
+--- !u!50 &7238877273497248181 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 4664534193736176003, guid: edcc2b9efcec7334ba970b568b85ee3c, type: 3}
+  m_PrefabInstance: {fileID: 2652173384858562614}
+  m_PrefabAsset: {fileID: 0}
