@@ -17,8 +17,13 @@ public class Shooting : MonoBehaviour
 
     public float fireForce;
 
+    public bool scale;
+
+
+
     public void Start()
     {
+        scale = true;
     }
 
     public void Fire()
@@ -38,6 +43,13 @@ public class Shooting : MonoBehaviour
         direction.Normalize();
         direction *= fireForce;
 
+        // if (scale == false){
+        //     laser.transform.localScale = new Vector3(2, 5, 0);
+        // }
+        // else{
+        //     laser.transform.localScale = new Vector3(.75f, 3, 0);
+        // }
+
         // Find the BulletScript prefab on that spawned bullet, and set it's velocity component.
         laser.GetComponent<Laser>().Velocity = direction;
 
@@ -49,6 +61,7 @@ public class Shooting : MonoBehaviour
         //reset bullet properties
         //bullet.GetComponent<Bullet>().ChangeBulletDmg(1);
         laser.transform.localScale = new Vector3(0.75f, 3f, 0);
+        //
     }
 
 }

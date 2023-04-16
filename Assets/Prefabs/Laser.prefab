@@ -100,11 +100,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 4664534193736176003}
-  Velocity: {x: -24.391764, y: 43.646782, z: 0}
+  Velocity: {x: 17.960867, y: -46.662693, z: 0}
   BulletDmg: 1
   lastVelocity: {x: 0, y: 0, z: 0}
   widthThresold: {x: -50, y: 1100}
   heightThresold: {x: -50, y: 1100}
+  scale: 0
 --- !u!50 &4664534193736176003
 Rigidbody2D:
   serializedVersion: 4

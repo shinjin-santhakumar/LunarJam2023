@@ -78,5 +78,10 @@ public class TanEnemy : MonoBehaviour
         //bullet.transform.localScale = new Vector3(0.75f, 3f, 0);
     }
 
+    private void timeToDie()
+    {
+        Destroy(gameObject);
+    }
+
 
 }

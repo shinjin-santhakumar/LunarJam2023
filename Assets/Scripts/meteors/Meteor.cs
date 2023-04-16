@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Meteor : MonoBehaviour
 {
-    private float speed = 1f;
+    private float speed = .5f;
     public float rotation_speed = .2f;
     private Vector2 target;
     private Vector2 position;
@@ -13,7 +13,11 @@ public class Meteor : MonoBehaviour
     private float MeteorHp = 2f;
     GameObject Player;
 
+    public GameObject FireRate;
+    public GameObject BulletBigger;
+    private int Powerup;
     private Animator anim;
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -22,7 +26,7 @@ public class Meteor : MonoBehaviour
         target = Player.transform.position;
         offset = new Vector2(Random.Range(-50,50), Random.Range(-50,50));
         direction = target + offset - position;
-        Destroy(gameObject, 5f);
+        Destroy(gameObject, 20f);
     }
 
     // Update is called once per frame
@@ -46,6 +50,17 @@ public class Meteor : MonoBehaviour
 
     private void timeToDie()
     {
+        Powerup = Random.Range(0, 2);
+        //Debug.Log(Powerup);
+        switch(Powerup) 
+            {
+            case 1:
+                Instantiate(FireRate, transform.position, transform.rotation);
+                break;
+            case 0:
+                Instantiate(BulletBigger, transform.position, transform.rotation);
+                break;
+            }
         Destroy(gameObject);
     }
 

@@ -100,8 +100,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 531691a96c210034f94cdf7ee7dfac05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
   rotation_speed: 0.2
+  FireRate: {fileID: 4959277490422347473, guid: f97dea6f819e0234fae264ee8b6de3fa, type: 3}
+  RefillBoost: {fileID: 0}
+  BulletBigger: {fileID: 4498358808666324383, guid: 33d1e3f897dd7c1478802bbbde8e1c89, type: 3}
 --- !u!50 &-1582183700672147566
 Rigidbody2D:
   serializedVersion: 4

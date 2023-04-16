@@ -16,9 +16,17 @@ public class FreezeTimer : MonoBehaviour
 
     public GameObject player;
 
+    public GameObject freezeSquare;
+    private Image img;
+    private bool justFroze;
+    private float speed;
+
     private void Start()
     {
         Frozen = true;
+        justFroze = false;
+        speed = .5f;
+        img = freezeSquare.GetComponent<Image>();
     }
 
     private void FixedUpdate()
@@ -28,6 +36,7 @@ public class FreezeTimer : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(justFroze);
         if (TimeLeft > 0)
         {
             TimeLeft -= Time.deltaTime;
@@ -37,6 +46,16 @@ public class FreezeTimer : MonoBehaviour
         {
             //Debug.Log("Time is UP!");
             TimeLeft = 10;
+        }
+        if (justFroze == true)
+        {
+            Debug.Log(img.color.a);
+            img.enabled = true;
+            if (img.color.a - speed * Time.deltaTime > 0)
+            {
+                img.color = new Color(img.color.r, img.color.b, img.color.g, img.color.a - speed * Time.deltaTime);
+            }
+            //img.color = new Color(img.color.r, img.color.b, img.color.g, img.color.a - speed * Time.deltaTime);
         }
     }
 
@@ -57,7 +76,13 @@ public class FreezeTimer : MonoBehaviour
             Globalmovespeed = 1;
 
             if (seconds == 0)
+            {
                 Frozen = false;
+                justFroze = true;
+                img.enabled = false;
+                img.color = new Color(img.color.r, img.color.b, img.color.g, .39f);
+            }
+                
         }
         else 
         {
@@ -65,7 +90,12 @@ public class FreezeTimer : MonoBehaviour
             Globalmovespeed = 0;
 
             if (seconds == 0)
+            {
                 Frozen = true;
+                justFroze = false;
+                //img.color.a = 100;
+            }
+                //Frozen = true;
         }
             
     }

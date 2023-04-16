@@ -17,6 +17,10 @@ public class PlayerLife : MonoBehaviour
 
     private GameObject[] enemies;
 
+    private bool takingDamage;
+
+    public GameObject cameraShake;
+
     [SerializeField] private PlayerController pc;
     // Start is called before the first frame update
     void Start()
@@ -24,6 +28,7 @@ public class PlayerLife : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         healthanim = healthbar.GetComponent<Animator>();
+        takingDamage = false;
 
         // if (enemies == null)
         //     enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -37,8 +42,10 @@ public class PlayerLife : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-       if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("EnemyLaser"))
+       if (takingDamage == false && (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("EnemyLaser")))
        {
+            takingDamage = true;
+            //StartCoroutine(cameraShake.GetComponent<Screenshake>().Shake(0.4f, 0.7f));
 
             if (collision.gameObject.CompareTag("EnemyLaser"))
             {
@@ -46,10 +53,11 @@ public class PlayerLife : MonoBehaviour
             }
 
 
-            this.GetComponent<BoxCollider2D>().enabled = false;
+            //this.GetComponent<BoxCollider2D>().enabled = false;
             health -= 1;
             if (health >= 1)
             {
+                StartCoroutine(cameraShake.GetComponent<Screenshake>().Shake(0.4f, 0.7f));
                 //health -= 1;
                 healthanim.SetTrigger("damage");
                 StartCoroutine(takeDamage());
@@ -57,7 +65,7 @@ public class PlayerLife : MonoBehaviour
             else if (health == 0)
             {
 
-
+                StartCoroutine(cameraShake.GetComponent<Screenshake>().Shake(0.4f, 0.7f));
                 foreach (GameObject enemy in enemies)
                 {
                     enemy.GetComponent<Animator>().speed = 0;
@@ -80,7 +88,7 @@ public class PlayerLife : MonoBehaviour
 
     private IEnumerator takeDamage()
     {
-        this.GetComponent<BoxCollider2D>().enabled = false;
+        //this.GetComponent<BoxCollider2D>().enabled = false;
         this.GetComponent<SpriteRenderer>().color = Color.red;
         yield return new WaitForSeconds(.1f);
         this.GetComponent<SpriteRenderer>().color = Color.white;
@@ -93,7 +101,8 @@ public class PlayerLife : MonoBehaviour
         yield return new WaitForSeconds(.1f);
         this.GetComponent<SpriteRenderer>().color = Color.white;
         yield return new WaitForSeconds(.5f);
-        this.GetComponent<BoxCollider2D>().enabled = true;
+        //this.GetComponent<BoxCollider2D>().enabled = true;
+        takingDamage = false;
         //yield return new WaitForSeconds(.1f);
     }
 

@@ -12,6 +12,9 @@ public class Emovement : MonoBehaviour
     private float minX, maxX, minY, maxY;  // the minimum and maximum x and y values for the enemy's position
     private int direction = 1;  // the direction of the enemy's movement, either 1 or -1
 
+    public float facingAngle = 90f;
+    public float toleranceAngle = 5f;
+
     void Start()
     {
         // get references to the main camera and the enemy's renderer
@@ -27,8 +30,27 @@ public class Emovement : MonoBehaviour
 
     void Update()
     {
+
+        Vector3 center = new Vector3(0f, 0f, 0f);
+
+        Vector3 direction = center - transform.position;
+
+        // Calculate angle between forward direction and direction towards center
+        float angle = Vector3.Angle(transform.forward, direction);
+
+        // Check if angle is within tolerance and within facing angle range
+        // if (Mathf.Abs(angle) <= toleranceAngle && Mathf.Abs(angle) <= facingAngle)
+        // {
+        //     //Debug.Log("Object is facing center");
+        // }
+        // else
+        // {
+        //     //Debug.Log("Object is not facing center");
+        // }
+
+
         // calculate the new position based on the enemy's direction and speed
-        Vector3 newPosition = transform.position + transform.right * speed * Time.deltaTime;
+        Vector3 newPosition = transform.position + transform.right * speed * Time.deltaTime * FreezeTimer.Globalmovespeed;
 
         // if the enemy reaches the edge of the screen, change direction
         if (newPosition.x < minX || newPosition.x > maxX || newPosition.y < minY || newPosition.y > maxY) {

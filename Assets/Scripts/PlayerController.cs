@@ -25,12 +25,18 @@ public class PlayerController : MonoBehaviour
     public bool canAim = true;
     public bool canShoot = true;
 
+    private float firerate = 1;
+    public GameObject Laser;
+
+    [SerializeField] private AudioSource shootSound;
+
     //static public float Globalmovespeed;
 
     // Start is called before the first frame update
     private void Awake()
     {
         playerControls = new PlayerInputActions();
+        Laser.GetComponent<Laser>().scale = true;
 
     }
 
@@ -70,6 +76,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            //Comment out to fire whenever
             fire.Disable();
         }
         moveDirection = move.ReadValue<Vector2>();
@@ -116,10 +123,13 @@ public class PlayerController : MonoBehaviour
         if (canShoot)
         {
             shoot.Fire();
+            shootSound.Play();
             StartCoroutine(SetCanShoot());
         }
-        //Debug.Log("Fired");
+
         // shoot.Fire();
+        // shootSound.Play();
+        //StartCoroutine(SetCanShoot());
     
     }
 
@@ -134,7 +144,31 @@ public class PlayerController : MonoBehaviour
     IEnumerator SetCanShoot()
     {
         canShoot = false;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(firerate);
         canShoot = true;
+    }
+
+    IEnumerator wait(){
+        firerate = .5f;
+        yield return new WaitForSeconds(20);
+        firerate = 1;
+    }
+    IEnumerator waitBullet(){
+        Debug.Log("time to enumerate");
+        Laser.GetComponent<Laser>().scale = false;
+        yield return new WaitForSeconds(20f);
+        Laser.GetComponent<Laser>().scale = true;
+    }
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.CompareTag("FireRate")){
+            Destroy(other.gameObject);
+            StartCoroutine(wait());
+           
+        }
+        if (other.gameObject.CompareTag("BulletBigger")){
+            Destroy(other.gameObject);
+            StartCoroutine(waitBullet());
+           
+        }
     }
 }

@@ -19,7 +19,11 @@ public class Laser : MonoBehaviour
     private Camera mainCamera;
     public Vector2 widthThresold;
     public Vector2 heightThresold;
+    public bool scale;
 
+    private void Start()
+    {
+    }
 
     private void Awake()
     {
@@ -28,6 +32,12 @@ public class Laser : MonoBehaviour
 
     void Update()
     {
+        if (scale == false){
+            transform.localScale = new Vector3(2, 5, 0);
+        }
+        else{
+            transform.localScale = new Vector3(.75f, 3, 0);
+        }
         // Move the bullet in the direction of our velocity.
         transform.position += Velocity * Time.deltaTime * FreezeTimer.Globalmovespeed;
         lastVelocity = Velocity;
