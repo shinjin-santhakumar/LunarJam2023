@@ -14,6 +14,8 @@ public class FreezeTimer : MonoBehaviour
 
     private bool Frozen;
 
+    public GameObject player;
+
     private void Start()
     {
         Frozen = true;
@@ -41,6 +43,11 @@ public class FreezeTimer : MonoBehaviour
 
     void updateTimer(float currentTime)
     {
+        if (player.GetComponent<PlayerLife>().health == 0)
+        {
+            Globalmovespeed = 0;
+            return;
+        }
         currentTime += 1;
         float seconds = Mathf.FloorToInt(currentTime % 60);
 

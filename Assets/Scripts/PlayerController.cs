@@ -14,12 +14,16 @@ public class PlayerController : MonoBehaviour
     private InputAction move;
     private InputAction fire;
     private InputAction freeze;
+    private InputAction boost;
     private Vector2 moveDirection;
     private bool Freezing;
+    [SerializeField] private Boostbar bbb;
+    private bool holdingBoost;
 
     public Shooting shoot;
 
     public bool canAim = true;
+    private bool canShoot = true;
 
     //static public float Globalmovespeed;
 
@@ -42,6 +46,9 @@ public class PlayerController : MonoBehaviour
 
         freeze = playerControls.Player.Freeze;
         freeze.Enable();
+
+        boost = playerControls.Player.Boost;
+        boost.Enable();
         
 
     }
@@ -51,11 +58,20 @@ public class PlayerController : MonoBehaviour
         move.Disable();
         fire.Disable();
         freeze.Disable();
+        boost.Disable();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (FreezeTimer.Globalmovespeed == 0)
+        {
+            fire.Enable();
+        }
+        else
+        {
+            fire.Disable();
+        }
         moveDirection = move.ReadValue<Vector2>();
 
         if (canAim == true)
@@ -69,6 +85,11 @@ public class PlayerController : MonoBehaviour
 
         Freezing = freeze.ReadValue<float>() > 0;
 
+        // if (holdingBoost)
+        //     bbb.UseBoost();
+
+        holdingBoost = boost.ReadValue<float>() > 0.1f;
+
 
 
 
@@ -78,6 +99,9 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         ifFreezing();
+
+        if (holdingBoost)
+            bbb.UseBoost();
 
     }
 
@@ -89,23 +113,28 @@ public class PlayerController : MonoBehaviour
 
     void Fire(InputAction.CallbackContext context) 
     {
-        Debug.Log("Fired");
-        shoot.Fire();
+        if (canShoot)
+        {
+            shoot.Fire();
+            StartCoroutine(SetCanShoot());
+        }
+        //Debug.Log("Fired");
+        // shoot.Fire();
     
     }
 
     void ifFreezing()
     {
-
         //if (Freezing)
         //    Globalmovespeed = 0;
         //else
         //    Globalmovespeed = 1;
-
-
-
-
     }
 
-
+    IEnumerator SetCanShoot()
+    {
+        canShoot = false;
+        yield return new WaitForSeconds(1f);
+        canShoot = true;
+    }
 }

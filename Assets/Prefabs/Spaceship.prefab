@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 8133185279238973984}
   - component: {fileID: 1783690031050583861}
   - component: {fileID: 6230055920174696357}
+  - component: {fileID: 5514076462416929950}
   m_Layer: 0
   m_Name: Spaceship
   m_TagString: Untagged
@@ -238,6 +239,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthbar: {fileID: 0}
   pc: {fileID: 6890316202611006477}
+--- !u!114 &5514076462416929950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6890316202611006465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8adeaf8331924d40bb68c9e8c332d43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boostBar: {fileID: 0}
+  boostForce: 150
+  rb: {fileID: 6890316202611006476}
+  direction: {fileID: 6890316202611006479}
 --- !u!1 &6890316202887411663
 GameObject:
   m_ObjectHideFlags: 0

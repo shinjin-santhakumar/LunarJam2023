@@ -12,8 +12,11 @@ public class ShotgunEnemy : MonoBehaviour
     private float distance;
     public float thrust;
 
+    private Animator anim;
+
     void Start()
     {
+        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         target = GameObject.FindWithTag("Player").transform;
     }
@@ -28,6 +31,8 @@ public class ShotgunEnemy : MonoBehaviour
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg  * FreezeTimer.Globalmovespeed;
             //rb.rotation = angle;
             moveDirection = direction;
+
+            anim.speed = FreezeTimer.Globalmovespeed;
         }
     }
 

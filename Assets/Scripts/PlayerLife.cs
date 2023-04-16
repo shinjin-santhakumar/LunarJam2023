@@ -8,7 +8,10 @@ public class PlayerLife : MonoBehaviour
     private Animator anim;
     [SerializeField] GameObject healthbar;
     private Animator healthanim;
-    private int health = 3;
+    private Animator enemyanim;
+    public int health = 3;
+
+    private GameObject[] enemies;
 
     [SerializeField] private PlayerController pc;
     // Start is called before the first frame update
@@ -17,18 +20,28 @@ public class PlayerLife : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         healthanim = healthbar.GetComponent<Animator>();
+
+        // if (enemies == null)
+        //     enemies = GameObject.FindGameObjectsWithTag("Enemy");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("EnemyLaser"))
        {
+
+            if (collision.gameObject.CompareTag("EnemyLaser"))
+            {
+                Destroy(collision.gameObject);
+            }
+
+
             this.GetComponent<BoxCollider2D>().enabled = false;
             health -= 1;
             if (health >= 1)
@@ -39,6 +52,15 @@ public class PlayerLife : MonoBehaviour
             }
             else if (health == 0)
             {
+
+
+                foreach (GameObject enemy in enemies)
+                {
+                    enemy.GetComponent<Animator>().speed = 0;
+                    enemy.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+                    //enemy.GetComponent<Animator>().speed = 0;
+                }
+
                 pc.canAim = false;
                 healthanim.SetTrigger("damage");
                 anim.SetTrigger("death");

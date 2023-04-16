@@ -34,8 +34,8 @@ public class Laser : MonoBehaviour
 
 
         Vector2 screenPosition = mainCamera.WorldToScreenPoint(transform.position);
-        Debug.Log("x:" + screenPosition.x);
-        Debug.Log("y:" + screenPosition.y);
+        // Debug.Log("x:" + screenPosition.x);
+        // Debug.Log("y:" + screenPosition.y);
         if (screenPosition.x < widthThresold.x || screenPosition.x > widthThresold.y || screenPosition.y < heightThresold.x || screenPosition.y > heightThresold.y)
             Destroy(gameObject);
 
@@ -47,6 +47,7 @@ public class Laser : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             //Debug.Log("coll");
+            collision.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
             collision.gameObject.GetComponent<BoxCollider2D>().enabled = false;
             collision.gameObject.GetComponent<Animator>().SetTrigger("death");
             Destroy(gameObject);

@@ -11,23 +11,36 @@ public class DefaultEnemy : MonoBehaviour
     Vector2 moveDirection;
     private float distance;
     public float thrust;
+    private float angle;
+
+    private Animator anim;
 
     void Start()
     {
+        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         target = GameObject.FindWithTag("Player").transform;
     }
 
     void Update()
     {
+        if (FreezeTimer.Globalmovespeed == 0)
+        {
+            rb.rotation = angle;
+            anim.speed = FreezeTimer.Globalmovespeed;
+            return;
+        }
         if (target)
         {
+
             distance = Vector2.Distance(target.position, transform.position);
 
             Vector3 direction = (target.position - transform.position).normalized;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg  * FreezeTimer.Globalmovespeed;
+            angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg  * FreezeTimer.Globalmovespeed;
             rb.rotation = angle;
             moveDirection = direction;
+            
+            anim.speed = FreezeTimer.Globalmovespeed;
         }
     }
 

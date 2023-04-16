@@ -12,8 +12,11 @@ public class Meteor : MonoBehaviour
     private Vector2 offset;
     private float MeteorHp = 2f;
     GameObject Player;
+
+    private Animator anim;
     void Start()
     {
+        anim = GetComponent<Animator>();
         Player = GameObject.FindWithTag("Player");
         position = transform.position;
         target = Player.transform.position;
@@ -27,12 +30,10 @@ public class Meteor : MonoBehaviour
     {
         speed = Random.Range(.2f, 1);
         gameObject.GetComponent<Rigidbody2D>().velocity = direction * speed * FreezeTimer.Globalmovespeed;
-        transform.Rotate(0, 0, 360 * rotation_speed * Time.deltaTime);
-        if (MeteorHp == 0)
-        {
-            Destroy(gameObject);
-           
-        }
+        transform.Rotate(0, 0, 360 * rotation_speed * Time.deltaTime * FreezeTimer.Globalmovespeed);
+
+        anim.speed = FreezeTimer.Globalmovespeed;
+
     }
     // private void OnCollisionEnter2D(Collision2D collision)
     // {

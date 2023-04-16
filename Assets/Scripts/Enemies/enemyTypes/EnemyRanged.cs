@@ -12,8 +12,11 @@ public class EnemyRanged : MonoBehaviour
     private float distance;
     public float DistanceFrom;
 
+    private Animator anim;
+
     private void Awake()
     {
+        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         target = GameObject.FindWithTag("Player").transform;
         distance = Vector2.Distance(transform.position, target.position);
@@ -32,6 +35,8 @@ public class EnemyRanged : MonoBehaviour
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             //rb.rotation = angle;
             moveDirection = direction;
+
+            anim.speed = FreezeTimer.Globalmovespeed;
         }
     }
 
