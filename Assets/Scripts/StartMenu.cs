@@ -8,12 +8,12 @@ public class StartMenu : MonoBehaviour
     // Start is called before the first frame update
     public void StartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(1);
     }
 
     public void StartRules()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+        SceneManager.LoadScene(2);
     }
 
     public void Quit()
@@ -29,5 +29,10 @@ public class StartMenu : MonoBehaviour
     public void Retry()
     {
         SceneManager.LoadScene(1);
+    }
+
+    public void Credits()
+    {
+        SceneManager.LoadScene(3);
     }
 }

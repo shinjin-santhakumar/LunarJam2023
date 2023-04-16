@@ -159,7 +159,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00046921, y: 14}
+  m_AnchoredPosition: {x: 0.00046921, y: -134}
   m_SizeDelta: {x: 512, y: 392.932}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &123684666
@@ -195,28 +195,19 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'During the red timer,
+  m_Text: 'PROGRAMMING:
 
-    enemies can spawn, move
+    Aidan Sunahara
 
-    and shoot. The
-    player can
+    Shinjin Santakhumar
 
-    only move.
+    Brian Loewe
 
-    During the blue timer,
 
-    enemies and lasers
-    are
+    ART/MUSIC:
 
-    frozen in place. The player
-
-    can shoot, but their lasers
-
-    won''t
-    travel until the
-
-    blue timer expires.'
+    Brian
+    Loewe'
 --- !u!222 &123684667
 CanvasRenderer:
   m_ObjectHideFlags: 0
