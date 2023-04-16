@@ -43,7 +43,11 @@ public class EnemyLaser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (FreezeTimer.Globalmovespeed == 0)
+        {
+            rb.rotation = angle;
+            return;
+        }
         Vector3 direction_angle = ((target + offset) - position).normalized;
         angle = Mathf.Atan2(direction_angle.y, direction_angle.x) * Mathf.Rad2Deg * FreezeTimer.Globalmovespeed;
         

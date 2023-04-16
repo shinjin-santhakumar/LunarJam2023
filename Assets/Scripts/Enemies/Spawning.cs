@@ -7,6 +7,7 @@ public class Spawning : MonoBehaviour
     public GameObject RangedEnemy;
     public GameObject DefaultEnemy;
     public GameObject ShotgunEnemy;
+    public GameObject TurretEnemy;
     // the range of X
     float minX;
     float maxX;
@@ -17,7 +18,8 @@ public class Spawning : MonoBehaviour
     private bool EnemySpawn = false;
     private float randomSide;
     private float randWave;
-    public float WaveCooldown;
+    private float WaveCooldown = 10;
+    private bool difficulty = false;
     Dictionary<string, float[]> side = new Dictionary<string, float[]>()
         {
         // xMin xMax yMin yMax
@@ -30,10 +32,14 @@ public class Spawning : MonoBehaviour
         
    }
    IEnumerator wait(){
-    yield return new WaitForSeconds(1);
+    difficulty = true;
+    yield return new WaitForSeconds(30);
+    WaveCooldown = WaveCooldown - .5f;
+    Debug.Log(WaveCooldown);
+    difficulty = false;
    }
     public void getRandPos(){
-        randomSide = Random.Range(0, 3);
+        randomSide = Random.Range(0, 4);
             switch (randomSide)
             {
                 case 0:
@@ -72,6 +78,10 @@ public class Spawning : MonoBehaviour
         {
             StartCoroutine(Cooldown());
         }
+        if (difficulty == false && WaveCooldown > 6){
+            StartCoroutine(wait());
+        }
+        
     }
     IEnumerator Cooldown()
     {
@@ -80,14 +90,20 @@ public class Spawning : MonoBehaviour
         switch(randWave) 
             {
                 case 0:
-                SpawnRangedEnemy();
+                //SpawnRangedEnemy();
+                SpawnTurretEnemy();
                 break;
                 case 1:
                 // code block
-                SpawnShotgunEnemy();
+                //SpawnShotgunEnemy();
+                SpawnTurretEnemy();
                 break;
                 case 2:
-                SpawnDefaultEnemy();
+                //SpawnDefaultEnemy();
+                SpawnTurretEnemy();
+                break;
+                case 3:
+                SpawnTurretEnemy();
                 break;
             
                 
@@ -151,6 +167,21 @@ public class Spawning : MonoBehaviour
             pos = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
             Instantiate(ShotgunEnemy, pos, transform.rotation);
         
+    }
+     void SpawnTurretEnemy()
+    {    
+          
+            pos = new Vector2(-55, 45);
+            Instantiate(TurretEnemy, pos, transform.rotation);
+          
+            pos = new Vector2(55, -45);
+            gameObject.transform.eulerAngles = new Vector3(
+    gameObject.transform.eulerAngles.x,
+    gameObject.transform.eulerAngles.y,
+    gameObject.transform.eulerAngles.z+ 180
+);
+            Instantiate(TurretEnemy, pos, transform.rotation);
+            
     }
     
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Meteor : MonoBehaviour
 {
-    private float speed = 1f;
+    private float speed = .5f;
     public float rotation_speed = .2f;
     private Vector2 target;
     private Vector2 position;
@@ -13,6 +13,10 @@ public class Meteor : MonoBehaviour
     private float MeteorHp = 2f;
     GameObject Player;
 
+    public GameObject FireRate;
+    public GameObject RefillBoost;
+    public GameObject BulletBigger;
+    private int Powerup;
     private Animator anim;
     void Start()
     {
@@ -46,6 +50,16 @@ public class Meteor : MonoBehaviour
 
     private void timeToDie()
     {
+        Powerup = Random.Range(0,1);
+        switch(Powerup) 
+            {
+            case 1:
+                Instantiate(BulletBigger, transform.position, transform.rotation);
+                break;
+            case 0:
+                Instantiate(BulletBigger, transform.position, transform.rotation);
+                break;
+            }
         Destroy(gameObject);
     }
 

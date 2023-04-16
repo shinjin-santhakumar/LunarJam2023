@@ -20,6 +20,8 @@ public class Laser : MonoBehaviour
     public Vector2 widthThresold;
     public Vector2 heightThresold;
 
+    public bool scale;
+
 
     private void Awake()
     {
@@ -29,6 +31,13 @@ public class Laser : MonoBehaviour
     void Update()
     {
         // Move the bullet in the direction of our velocity.
+        if (scale == false){
+            transform.localScale = new Vector3(2, 5, 0);
+        }
+        else{
+            transform.localScale = new Vector3(.75f, 3, 0);
+        }
+        
         transform.position += Velocity * Time.deltaTime * FreezeTimer.Globalmovespeed;
         lastVelocity = Velocity;
 
@@ -52,6 +61,7 @@ public class Laser : MonoBehaviour
             collision.gameObject.GetComponent<Animator>().SetTrigger("death");
             Destroy(gameObject);
         }
+        
     }
 
     public void ChangeBulletDmg(float x)

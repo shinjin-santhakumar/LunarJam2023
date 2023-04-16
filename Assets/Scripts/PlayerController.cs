@@ -25,13 +25,17 @@ public class PlayerController : MonoBehaviour
     public bool canAim = true;
     private bool canShoot = true;
 
+    private float firerate = 1;
+    public GameObject Laser;
+
     //static public float Globalmovespeed;
 
     // Start is called before the first frame update
     private void Awake()
     {
         playerControls = new PlayerInputActions();
-
+        Laser.GetComponent<Laser>().scale = true;
+        
     }
 
     private void OnEnable()
@@ -71,6 +75,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             fire.Disable();
+            fire.Enable();
         }
         moveDirection = move.ReadValue<Vector2>();
 
@@ -134,7 +139,31 @@ public class PlayerController : MonoBehaviour
     IEnumerator SetCanShoot()
     {
         canShoot = false;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(firerate);
         canShoot = true;
+    }
+    IEnumerator wait(){
+        firerate = .5f;
+        yield return new WaitForSeconds(20);
+        firerate = 1;
+    }
+    IEnumerator waitBullet(){
+        Debug.Log("ffff");
+        Laser.GetComponent<Laser>().scale = false;
+        yield return new WaitForSeconds(20);
+        Laser.GetComponent<Laser>().scale = true;
+    }
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.CompareTag("FireRate")){
+            Destroy(other.gameObject);
+            StartCoroutine(wait());
+           
+        }
+        if (other.gameObject.CompareTag("BulletBigger")){
+            
+            Destroy(other.gameObject);
+            StartCoroutine(waitBullet());
+           
+        }
     }
 }
