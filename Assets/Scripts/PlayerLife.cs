@@ -11,6 +11,10 @@ public class PlayerLife : MonoBehaviour
     private Animator enemyanim;
     public int health = 3;
 
+    public GameObject gameovertext;
+    public GameObject retrybutton;
+    public GameObject menubutton;
+
     private GameObject[] enemies;
 
     [SerializeField] private PlayerController pc;
@@ -65,6 +69,9 @@ public class PlayerLife : MonoBehaviour
                 healthanim.SetTrigger("damage");
                 anim.SetTrigger("death");
                 rb.bodyType = RigidbodyType2D.Static;
+                
+                GetComponent<PlayerController>().canShoot = false;
+                StartCoroutine(gameOver());
                 //anim.SetTrigger("death");
             }
             //rb.bodyType = RigidbodyType2D.Static;
@@ -88,5 +95,14 @@ public class PlayerLife : MonoBehaviour
         yield return new WaitForSeconds(.5f);
         this.GetComponent<BoxCollider2D>().enabled = true;
         //yield return new WaitForSeconds(.1f);
+    }
+
+    private IEnumerator gameOver()
+    {
+        yield return new WaitForSeconds(1f);
+        gameovertext.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        retrybutton.SetActive(true);
+        menubutton.SetActive(true);
     }
 }

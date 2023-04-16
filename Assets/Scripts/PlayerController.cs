@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     public Shooting shoot;
 
     public bool canAim = true;
-    private bool canShoot = true;
+    public bool canShoot = true;
 
     //static public float Globalmovespeed;
 
