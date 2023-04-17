@@ -4,6 +4,12 @@ using System.Collections;
 public class Screenshake : MonoBehaviour
 {
 
+
+    void Awake()
+    {
+        Screen.SetResolution(1024, 2024, true);
+    }
+
     public IEnumerator Shake(float duration, float magnitude)
     {
         Vector3 orignalPosition = transform.position;

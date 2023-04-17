@@ -146,15 +146,15 @@ public class Spawning : MonoBehaviour
             getRandPos();
             pos = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
             Instantiate(DefaultEnemy, pos, transform.rotation);
+            getRandPos();
+            pos = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
+            Instantiate(DefaultEnemy, pos, transform.rotation);
         
     }
     
     void SpawnShotgunEnemy()
     {
        
-            getRandPos();
-            pos = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
-            Instantiate(ShotgunEnemy, pos, transform.rotation);
             getRandPos();
             pos = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
             Instantiate(ShotgunEnemy, pos, transform.rotation);
