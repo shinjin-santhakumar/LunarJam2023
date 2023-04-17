@@ -21,6 +21,8 @@ public class Laser : MonoBehaviour
     public Vector2 heightThresold;
     public bool scale;
 
+    [SerializeField] private AudioSource laserSound;
+
     private void Start()
     {
     }
@@ -28,6 +30,7 @@ public class Laser : MonoBehaviour
     private void Awake()
     {
         mainCamera = FindObjectOfType<Camera>();
+        //laserSound.Play();
     }
 
     void Update()
@@ -60,7 +63,10 @@ public class Laser : MonoBehaviour
             collision.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
             collision.gameObject.GetComponent<BoxCollider2D>().enabled = false;
             collision.gameObject.GetComponent<Animator>().SetTrigger("death");
-            Destroy(gameObject);
+            GetComponent<BoxCollider2D>().enabled = false;
+            GetComponent<SpriteRenderer>().enabled = false;
+            laserSound.Play();
+            Destroy(gameObject, 1f);
         }
     }
 

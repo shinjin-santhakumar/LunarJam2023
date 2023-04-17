@@ -15,6 +15,8 @@ public class TanEnemy : MonoBehaviour
     private bool movingForward = true; // direction of movement
     public float fireForce;
 
+    [SerializeField] private AudioSource enemySound;
+
     void Start()
     {
         // set the starting and end positions
@@ -61,6 +63,7 @@ public class TanEnemy : MonoBehaviour
     void Shoot()
     {
 
+        enemySound.Play();
 
         Vector2 direction = -transform.up * fireForce;
 

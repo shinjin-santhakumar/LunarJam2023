@@ -101,7 +101,7 @@ public class Spawning : MonoBehaviour
                 SpawnDefaultEnemy();
                 break;
                 case 3:
-                StartCoroutine(SpawnTurretEnemy());
+                SpawnTurretEnemy();
                 break;
             
                 
@@ -167,21 +167,15 @@ public class Spawning : MonoBehaviour
         
     }
 
-    IEnumerator SpawnTurretEnemy()
-    {    
-          
-            pos = new Vector2(-55, 45);
-            Instantiate(TurretEnemy, pos, transform.rotation);
-            yield return new WaitForSeconds(3f);
-          
-            //pos = new Vector2(-55, -45);
-//             gameObject.transform.eulerAngles = new Vector3(
-//     gameObject.transform.eulerAngles.x,
-//     gameObject.transform.eulerAngles.y,
-//     gameObject.transform.eulerAngles.z+ 180
-// );
-            Instantiate(TurretEnemy, pos, transform.rotation);
-            
+    void SpawnTurretEnemy()
+    {
+
+        pos = new Vector2(45, Random.Range(-50, -75));
+        Instantiate(TurretEnemy, pos, transform.rotation);
+
+        pos = new Vector2(-45, Random.Range(50, 75));
+        Instantiate(TurretEnemy, pos, transform.rotation);
+
     }
     
 }

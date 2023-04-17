@@ -21,6 +21,10 @@ public class PlayerLife : MonoBehaviour
 
     public GameObject cameraShake;
 
+    [SerializeField] private AudioSource deathSound;
+    [SerializeField] private AudioSource damageSound;
+
+
     [SerializeField] private PlayerController pc;
     // Start is called before the first frame update
     void Start()
@@ -45,6 +49,7 @@ public class PlayerLife : MonoBehaviour
        if (takingDamage == false && (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("EnemyLaser")))
        {
             takingDamage = true;
+            
             //StartCoroutine(cameraShake.GetComponent<Screenshake>().Shake(0.4f, 0.7f));
 
             if (collision.gameObject.CompareTag("EnemyLaser"))
@@ -55,6 +60,7 @@ public class PlayerLife : MonoBehaviour
 
             //this.GetComponent<BoxCollider2D>().enabled = false;
             health -= 1;
+            damageSound.Play();
             if (health >= 1)
             {
                 StartCoroutine(cameraShake.GetComponent<Screenshake>().Shake(0.4f, 0.7f));
@@ -79,6 +85,7 @@ public class PlayerLife : MonoBehaviour
                 rb.bodyType = RigidbodyType2D.Static;
                 
                 GetComponent<PlayerController>().canShoot = false;
+                StartCoroutine(playSound());
                 StartCoroutine(gameOver());
                 //anim.SetTrigger("death");
             }
@@ -113,5 +120,11 @@ public class PlayerLife : MonoBehaviour
         yield return new WaitForSeconds(1f);
         retrybutton.SetActive(true);
         menubutton.SetActive(true);
+    }
+
+    private IEnumerator playSound()
+    {
+        yield return new WaitForSeconds(.4f);
+        deathSound.Play();
     }
 }

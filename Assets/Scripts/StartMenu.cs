@@ -23,11 +23,14 @@ public class StartMenu : MonoBehaviour
 
     public void ReturnToMenu()
     {
+        Cursor.visible = true;
+        Score.GameScore = 0;
         SceneManager.LoadScene(0);
     }
 
     public void Retry()
     {
+        Score.GameScore = 0;
         SceneManager.LoadScene(1);
     }
 

@@ -12,6 +12,8 @@ public class ShotgunEnemyShooting : MonoBehaviour
     private bool isVisible = false;
     EnemyLaser Script;
 
+    [SerializeField] private AudioSource enemySound;
+
     public void Start()
     {
         Script = laser.GetComponent<EnemyLaser>();
@@ -34,7 +36,8 @@ public class ShotgunEnemyShooting : MonoBehaviour
 
     IEnumerator SpawnLasers()
     {
-        Debug.Log("sdfsd");
+        enemySound.Play();
+        //Debug.Log("sdfsd");
         hasFired = true;
         Script.offset = new Vector3(7,7,0);
         Instantiate(laser, firepoint.position, firepoint.rotation);

@@ -13,6 +13,8 @@ public class EnemyShooting : MonoBehaviour
     private bool hasFired;
     private bool isVisible = false;
 
+    [SerializeField] private AudioSource enemySound;
+
     public void Start()
     {
         
@@ -35,6 +37,7 @@ public class EnemyShooting : MonoBehaviour
 
     IEnumerator SpawnLasers()
     {
+        enemySound.Play();
         hasFired = true;
         GameObject laser1 = Instantiate(laser, firepoint.position, firepoint.rotation);
         yield return new WaitForSeconds(5f);

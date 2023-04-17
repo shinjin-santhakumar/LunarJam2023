@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Emovement : MonoBehaviour
 {
@@ -14,6 +16,15 @@ public class Emovement : MonoBehaviour
 
     public float facingAngle = 90f;
     public float toleranceAngle = 5f;
+
+    public Transform target;
+    private float angle;
+
+
+    private Vector3 targetPosition1;
+    private Vector3 targetPosition2;
+    private Vector3 targetPosition;
+    private bool hasEnteredScreen = false;
 
     void Start()
     {
@@ -31,48 +42,64 @@ public class Emovement : MonoBehaviour
     void Update()
     {
 
-        Vector3 center = new Vector3(0f, 0f, 0f);
+        InGameLogic();
 
-        Vector3 direction = center - transform.position;
-
-        // Calculate angle between forward direction and direction towards center
-        float angle = Vector3.Angle(transform.forward, direction);
-
-        // Check if angle is within tolerance and within facing angle range
-        // if (Mathf.Abs(angle) <= toleranceAngle && Mathf.Abs(angle) <= facingAngle)
-        // {
-        //     //Debug.Log("Object is facing center");
-        // }
-        // else
-        // {
-        //     //Debug.Log("Object is not facing center");
-        // }
-
-
-        // calculate the new position based on the enemy's direction and speed
-        Vector3 newPosition = transform.position + transform.right * speed * Time.deltaTime * FreezeTimer.Globalmovespeed;
-
-        // if the enemy reaches the edge of the screen, change direction
-        if (newPosition.x < minX || newPosition.x > maxX || newPosition.y < minY || newPosition.y > maxY) {
-
-            transform.rotation *= Quaternion.Euler(0, 0, -90);
-
-
-            if(newPosition.x > maxX)
-                newPosition.x -= 1;
-            else if(newPosition.y < minY )
-                newPosition.y += 1;
-            else if(newPosition.y > maxY)
-                newPosition.y -= 1;
-            else if (newPosition.x < minX)
-                newPosition.x += 1;
-
-            //Debug.Log("1 -90");
-
-            //newPosition = transform.position + transform.right * speed * Time.deltaTime;
-        }
-
-        // update the enemy's position
-        transform.position = newPosition;
     }
+
+    void InGameLogic() {
+        // calculate the new position based on the enemy's direction and speed
+        
+
+        if (!hasEnteredScreen)
+        {
+            // Move the enemy towards the center of the screen
+
+            targetPosition1 = new Vector2(-43f, 43f);
+            targetPosition2 = new Vector2(43f, -43f);
+
+            float distanceFromP1 = Vector3.Distance(targetPosition1, transform.position);
+            float distanceFromP2 = Vector3.Distance(targetPosition2, transform.position);
+
+            if (distanceFromP1 < distanceFromP2)
+                targetPosition = targetPosition1;
+            else
+                targetPosition = targetPosition2;
+
+
+            transform.position = Vector2.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime * FreezeTimer.Globalmovespeed);
+
+            // Check if the enemy has entered the screen
+            if (transform.position == targetPosition)
+            {
+                hasEnteredScreen = true;
+            }
+        } else {
+
+            Vector3 newPosition = transform.position + transform.right * speed * Time.deltaTime * FreezeTimer.Globalmovespeed;
+            if (newPosition.x < minX || newPosition.x > maxX || newPosition.y < minY || newPosition.y > maxY)
+            {
+
+                transform.rotation *= Quaternion.Euler(0, 0, -90);
+
+
+                if (newPosition.x > maxX)
+                    newPosition.x -= 1;
+                else if (newPosition.y < minY)
+                    newPosition.y += 1;
+                else if (newPosition.y > maxY)
+                    newPosition.y -= 1;
+                else if (newPosition.x < minX)
+                    newPosition.x += 1;
+
+            }
+
+            // update the enemy's position
+            transform.position = newPosition;
+
+
+        }
+        
+
+    }
+
 }
