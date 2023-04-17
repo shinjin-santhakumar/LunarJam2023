@@ -10,6 +10,8 @@ public class PowerUp : MonoBehaviour
         Destroy(gameObject,5);
     }
 
+
+
     // Update is called once per frame
 
 

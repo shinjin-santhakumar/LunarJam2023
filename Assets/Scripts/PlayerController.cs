@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private AudioSource shootSound;
 
+    [SerializeField] private AudioSource pickupSound;
+
     //static public float Globalmovespeed;
 
     // Start is called before the first frame update
@@ -149,12 +151,14 @@ public class PlayerController : MonoBehaviour
     }
 
     IEnumerator wait(){
+        pickupSound.Play();
         firerate = .5f;
-        yield return new WaitForSeconds(20);
+        yield return new WaitForSeconds(20f);
         firerate = 1;
     }
     IEnumerator waitBullet(){
-        Debug.Log("time to enumerate");
+        pickupSound.Play();
+        //Debug.Log("time to enumerate");
         Laser.GetComponent<Laser>().scale = false;
         yield return new WaitForSeconds(20f);
         Laser.GetComponent<Laser>().scale = true;

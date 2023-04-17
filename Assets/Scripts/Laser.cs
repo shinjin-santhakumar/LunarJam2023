@@ -36,7 +36,7 @@ public class Laser : MonoBehaviour
     void Update()
     {
         if (scale == false){
-            transform.localScale = new Vector3(2, 5, 0);
+            transform.localScale = new Vector3(1.5f, 5, 0);
         }
         else{
             transform.localScale = new Vector3(.75f, 3, 0);
